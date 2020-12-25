@@ -1,6 +1,5 @@
 ## Requiments
 - Docker and docker composer
-- Node.js
 
 ## TODO:
 - arquicture
