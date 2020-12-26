@@ -2,6 +2,7 @@
   "name": "roga",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "src/app/server.js",
   "scripts": {
     "test": "jest",

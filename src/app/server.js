@@ -1,11 +1,16 @@
-const http = require('http');
-const hostname = '127.0.0.1';
+import http from 'http';
 
-const db = require('./../utils/mongodb');
-const port = 3000;
+import { environment } from '../config/environment.js';
+import { App, Routes } from './app.js';
 
-const server = require('./route.js'); // imports the routing file
+const app = new App();
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+const server = http.createServer((req, res) => {
+  app.router(req, res);
 });
+
+app.bootstrap().then(() => {
+  server.listen(environment.port, environment.hostname, () => {
+    console.log(`Server running at http://${environment.hostname}:${environment.port}/`);
+  });
+})
