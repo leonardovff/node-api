@@ -1,5 +1,5 @@
 import { environment } from '../../../config/environment.js';
-import { HttpsClient } from '../shared/index.js';
+import { HttpsClient, redisClient } from '../shared/index.js';
 
 export default class AddressesService {
 
@@ -9,15 +9,18 @@ export default class AddressesService {
     const position = `${latitude},${longitude}`;
     const url = `${mapquestEndpoint}?key=${apiKey}&location=${position}&includeRoadMetadata=true&includeNearestIntersection=true`;
 
-    const inCache = cacheInMemory.getCache(url);
-    const address = inCache ? inCache : await HttpsClient.get(url);
-
-    if(!inCache){
-      cacheInMemory.addCache(url, address);
-    }
+    const address = await new Promise(res => {
+      redisClient.get(url, async (err, data) => {
+        const address = !err || !data ? await HttpsClient.get(url) : data ;
+        if(err){
+          redisClient.set(url,  JSON.stringify(address));
+        }
+        res(address);
+      });
+    })
 
     const location = address.results[0].locations[0];
-    if(!location || !location.adminArea3 || !location.adminArea4 || !location.adminArea5){
+    if(!location || !location.adminArea3 || !location.adminArea1 || !location.adminArea5){
       return null;
     }
 
@@ -26,23 +29,9 @@ export default class AddressesService {
       bairro: location.adminArea6,
       cidade: location.adminArea5,
       estado: location.adminArea3,
-      pais: location.adminArea4,
+      pais: location.adminArea1,
       cep: location.postalCode
     }
   }
 
 }
-
-const cacheInMemory = (() => {
-  const cache = {};
-  const getCache = url => {
-    return cache[url] ? cache[url] : false;
-  };
-  const addCache = (url, data) => {
-    cache[url] = data;
-  };
-  return {
-    getCache,
-    addCache
-  }
-})();

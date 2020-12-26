@@ -41,10 +41,10 @@ cp .env.example .env
 ## Run server
 ### 1. Up the database resource: mongo
 ```bash
-docker-compose up -d mongo mongo-express
+docker-compose up -d
 ```
 
-### 2. Start development server
+### 2. Attach development server
 ```bash
 docker-compose up app
 ```

@@ -6,7 +6,11 @@ export const environment = {
     port: process.env.MONGO_PORT,
     user: process.env.MONGO_ROOT_USERNAME,
     password: process.env.MONGO_ROOT_PASSWORD,
-    dbName: process.env.MONGO_DB
+    dbName: process.env.MONGO_DB,
+  },
+  redis: {
+    host: process.env.REDIS_HOST,
+    port: process.env.REDIS_PORT
   },
   mapquestApiKey: process.env.MAPQUEST_API_KEY,
   mapquestUrl: `https://www.mapquestapi.com/`
