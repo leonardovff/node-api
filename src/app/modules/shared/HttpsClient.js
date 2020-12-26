@@ -1,4 +1,4 @@
-const https = require('https');
+import https from 'https';
 
 export default class HttpsClient {
   static get(url) { return new Promise((res, rej) => {

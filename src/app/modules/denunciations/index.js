@@ -1,4 +1,4 @@
-import DenunciationsRoutes from './denunciationsRoutes.js'
+import DenunciationsRoutes from './DenunciationsRoutes.js';
 
 export {
   DenunciationsRoutes
