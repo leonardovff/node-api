@@ -12,6 +12,7 @@ Node.js api with just one dependency (mongodb) in docker-compose infrastructure
 ### 1. Install Docker 
 #### Linux
 ```bash
+# install docker using a script 
 curl -fsSL https://get.docker.com -o get-docker.sh
 sudo sh get-docker.sh
 ```
@@ -29,6 +30,13 @@ sudo chmod +x /usr/local/bin/docker-compose
 #### Others SO
 https://docs.docker.com/compose/install/
 
+### 3. Secret file
+``` bash
+# copy file or copy the file that was sent
+cp .env.example .env
+
+# put the correct variables inside the .env
+``` 
 
 ## Run server
 ### 1. Up the database resource: mongo
@@ -68,20 +76,22 @@ curl -X GET \
 
 
 ## TODO:
-- arquicture
-  - read about patterns for node application
-  - keep using everything by myself without lib/framework?
-  - draw objects and responsabilities
-- DOTENV in node (lib?)
- --ex: URL DA API
- --ex: URL OF MONGODB AND CREDENTIALS
-- cache as resourse? memcache ? ou como ta? - two factors
-- tdd and refactory
-- remove express lib? - done
-- documentation
-- mongodb share path? - done
-
-
-- recode with new pattern and tdd
-- node in docker
-- memcache?
+1. architecture - done
+  - read about the last modern patterns for node application - done
+  - keep using everything by myself without lib/framework? - done
+  - draw objects and responsabilities - done
+2. DOTENV in node (lib?) - done
+  - ex: URL DA API - done
+  - ex: URL OF MONGODB AND CREDENTIALS - done
+  - all crecencials - done
+3. cache as resourse? memcache ? ou como ta? - two factors
+  - cache before call api - done
+  - use cache as resourse - ex: memcache - undone
+4. tdd and refactory - doing
+  - error handling - undone
+  - test - undone
+  - code in new architecture - done 
+5. remove express lib? - done
+5. documentation - done
+6. mongodb share path? - done
+7. node inside docker - done

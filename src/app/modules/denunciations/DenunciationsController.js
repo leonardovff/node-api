@@ -14,20 +14,25 @@ export default class DenunciationsControler {
     const body = await HttpServer.getBody(req, 'json');
     if(!body){
       // TODO: handle
-      res.end();
+      res.statusCode = 400;
+      res.end(JSON.stringify({message: "Request inválido."}));
     }
     const { latitude, longitude, denuncia, denunciante } = body;
 
     const endereco = await this.addressesService
-      .getAddressBasedOnGeoPosition(latitude, longitude);
+      .getAddressBasedOnGeoPosition(latitude, longitude)
+      .catch(err => {
+        console.log(err);
+        res.statusCode = 500;
+        res.end(JSON.stringify({message: "Endereço não encontrado para essa localidade."}));
+      });
 
 
     const data = await this.denunciationsService.create({
       latitude, longitude, denuncia, denunciante, endereco
     }).catch(err => {
       res.statusCode = 500;
-      console.log(err);
-      res.end(JSON.stringify({message: "Some error happened"}));
+      res.end(JSON.stringify({message: "Algo aconteceu de errado"}));
     });
 
     res.statusCode = 201;

@@ -11,9 +11,15 @@ export default class AddressesService {
 
     const inCache = cacheInMemory.getCache(url);
     const address = inCache ? inCache : await HttpsClient.get(url);
+
     if(!inCache){
       cacheInMemory.addCache(url, address);
     }
+    if(!location.adminArea3 && !location.adminArea4 && !location.adminArea5){
+      throw null;
+    }
+    // state //
+    // Estado, cidade e país
 
     const location = address.results[0].locations[0];
     return {
