@@ -1,4 +1,4 @@
-## What is
+## What is it
 Node.js api with just one dependency (mongodb) in docker-compose infrastructure
 
 
