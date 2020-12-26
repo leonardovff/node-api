@@ -19,17 +19,15 @@ export default class DenunciationsControler {
     }
     const { latitude, longitude, denuncia, denunciante } = body;
 
-    const endereco = await this.addressesService
-      .getAddressBasedOnGeoPosition(latitude, longitude)
-      .catch(err => {
-        console.log(err);
-        res.statusCode = 500;
-        res.end(JSON.stringify({message: "Endereço não encontrado para essa localidade."}));
-      });
-
+    const address = await this.addressesService
+      .getAddressBasedOnGeoPosition(latitude, longitude);
+    if(!address){
+      res.statusCode = 500;
+      return res.end(JSON.stringify({message: "Endereço não encontrado para essa localidade."}));
+    }
 
     const data = await this.denunciationsService.create({
-      latitude, longitude, denuncia, denunciante, endereco
+      latitude, longitude, denuncia, denunciante, endereco: address
     }).catch(err => {
       res.statusCode = 500;
       res.end(JSON.stringify({message: "Algo aconteceu de errado"}));

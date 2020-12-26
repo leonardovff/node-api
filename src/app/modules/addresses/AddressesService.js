@@ -15,13 +15,14 @@ export default class AddressesService {
     if(!inCache){
       cacheInMemory.addCache(url, address);
     }
-    if(!location.adminArea3 && !location.adminArea4 && !location.adminArea5){
-      throw null;
+
+    const location = address.results[0].locations[0];
+    if(!location || !location.adminArea3 || !location.adminArea4 || !location.adminArea5){
+      return null;
     }
     // state //
     // Estado, cidade e país
 
-    const location = address.results[0].locations[0];
     return {
       logradouro: location.street,
       bairro: location.adminArea6,

@@ -1,6 +1,10 @@
 import mongoClient from "./modules/shared/mongoClient.js";
 import { DenunciationsRoutes } from "./modules/denunciations/index.js";
 
+const Routes = [
+  ...DenunciationsRoutes
+];
+
 export default class App {
   async bootstrap(){
     await mongoClient.connect();
