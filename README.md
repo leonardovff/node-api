@@ -84,12 +84,13 @@ curl -X GET \
   - ex: URL DA API - done
   - ex: URL OF MONGODB AND CREDENTIALS - done
   - all crecencials - done
-3. cache as resourse? redis ? ou como ta? - two factors
+3. cache as resourse? redis ? ou como ta? - two factors - done
   - cache before call api - done
-  - use cache as resourse - ex: memcache - undone
+  - use cache as resourse - ex: redis - done
 4. tdd and refactory - doing
   - error handling - undone
   - test - undone
+  - data layer? - undone
   - code in new architecture - done 
 5. remove express lib? - done
 5. documentation - done
