@@ -1,11 +1,7 @@
 import mongoClient from "./modules/shared/mongoClient.js";
 import { DenunciationsRoutes } from "./modules/denunciations/index.js";
 
-export const Routes = [
-  ...DenunciationsRoutes
-];
-
-export class App {
+export default class App {
   async bootstrap(){
     await mongoClient.connect();
   }

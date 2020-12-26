@@ -1,7 +1,7 @@
 import http from 'http';
 
 import { environment } from '../config/environment.js';
-import { App, Routes } from './app.js';
+import App from './app.js';
 
 const app = new App();
 
