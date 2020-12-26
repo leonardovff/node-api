@@ -1,11 +1,7 @@
-FROM node:10
+FROM node:lts-alpine
 
 WORKDIR /usr/src/app
 
-COPY package*.json ./
+EXPOSE 80
 
-RUN npm install
-
-COPY . .
-
-CMD ["npm", "start"]
+CMD npm install && npm start

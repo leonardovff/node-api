@@ -1,13 +1,13 @@
 export const environment = {
-  hostname: 'localhost',
-  port: 8080,
+  hostname: '0.0.0.0',
+  port: 80,
   mongo: {
-    password: 'secret',
-    user: 'root',
-    host: 'localhost',
-    port: '27017',
-    dbName: 'roga'
+    host: process.env.MONGO_HOST,
+    port: process.env.MONGO_PORT,
+    user: process.env.MONGO_ROOT_USERNAME,
+    password: process.env.MONGO_ROOT_PASSWORD,
+    dbName: process.env.MONGO_DB
   },
-  mapquestApiKey: 'TGwqnI9ry71X4giA37h8nkK4srsOVL3w',
+  mapquestApiKey: process.env.MAPQUEST_API_KEY,
   mapquestUrl: `https://www.mapquestapi.com/`
 };

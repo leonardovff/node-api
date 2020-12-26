@@ -2,12 +2,25 @@
 version: '3.1'
 
 services:
-
+  app:
+    build: ./infra/nodemon
+    volumes:
+      - .:/usr/src/app
+    restart: always
+    ports:
+      - 3000:80
+    environment:
+      MAPQUEST_API_KEY: ${MAPQUEST_API_KEY}
+      MONGO_HOST: ${MONGO_HOST}
+      MONGO_PORT: ${MONGO_PORT}
+      MONGO_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_DB: ${MONGO_DB}
   mongo:
     image: mongo
     restart: always
     ports:
-      - 27017:27017
+      - "${MONGO_PORT}:27017"
     volumes:
       - "./infra/mongodata:/data/db"
     environment:
