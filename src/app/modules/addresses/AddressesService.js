@@ -20,8 +20,6 @@ export default class AddressesService {
     if(!location || !location.adminArea3 || !location.adminArea4 || !location.adminArea5){
       return null;
     }
-    // state //
-    // Estado, cidade e país
 
     return {
       logradouro: location.street,
